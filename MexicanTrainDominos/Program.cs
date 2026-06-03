@@ -25,7 +25,7 @@ namespace MexicanTrainDominos
             Console.ReadLine();
         }
 
-        // Tests the abstract class Train: Constructor, Count, EngineValue, IsEmpty, LastDomino, PlayableValue, Indexer, Play, and ToString methods.
+        // Tests the abstract parent class Train: Constructor, Count, EngineValue, IsEmpty, LastDomino, PlayableValue, Indexer, Play, and ToString methods.
         static void TestTrain()
         {
             Hand h = new Hand();
@@ -66,7 +66,7 @@ namespace MexicanTrainDominos
             Console.WriteLine("Train contents: " + train);
         }
 
-        // Tests the Mexican Train. Creates a hand with one domino and plays it on the Mexican Train. The train should accept the domino and the hand should be empty after.
+        // Tests the derived class MexicanTrain: Constructor, Add, IsPlayable
         static void TestMexicanTrain()
         {
             Hand h = new Hand();
@@ -75,6 +75,13 @@ namespace MexicanTrainDominos
             h.Add(d);
 
             MexicanTrain mt = new MexicanTrain(12);
+
+            bool mustFlip;
+
+            Console.WriteLine("Testing MexicanTrain IsPlayable");
+            Console.WriteLine("Domino [12|6] should be playable: " + mt.IsPlayable(h, d, out mustFlip));
+            Console.WriteLine("mustFlip should be false: " + mustFlip);
+
             mt.Play(h, d);
 
             Console.WriteLine("Testing MexicanTrain");
@@ -82,7 +89,7 @@ namespace MexicanTrainDominos
             Console.WriteLine("Hand should be empty: " + h);
         }
 
-        // Tests the PlayerTrain class. Creates 2 hands: 2 dominoes and 1 domino, and a PlayerTrain. Tests Play, Open, Close, and IsOpen.
+        // Tests the derived class PlayerTrain: Constructor, Add, IsPlayable, IsOpen, Open, Close, Play
         static void TestPlayerTrain()
         {
             Hand h1 = new Hand();
@@ -97,6 +104,26 @@ namespace MexicanTrainDominos
             h2.Add(d3);
 
             PlayerTrain pt = new PlayerTrain(h1, 12);
+
+            bool mustFlip;
+
+            Console.WriteLine("Testing PlayerTrain IsPlayable");
+            Console.WriteLine("Owner hand should be able to play [12|5]: " + pt.IsPlayable(h1, d1, out mustFlip));
+            Console.WriteLine("mustFlip should be false: " + mustFlip);
+
+            Console.WriteLine("Other hand should NOT be able to play [3|4] while train is closed: " + pt.IsPlayable(h2, d3, out mustFlip));
+            Console.WriteLine("mustFlip should be false: " + mustFlip);
+
+            pt.Open();
+            Console.WriteLine("Other hand still should NOT be able to play [3|4] because it does not match 12: " + pt.IsPlayable(h2, d3, out mustFlip));
+
+            Domino d4 = new Domino(7, 12);
+            h2.Add(d4);
+
+            Console.WriteLine("Other hand should be able to play [7|12] while train is open: " + pt.IsPlayable(h2, d4, out mustFlip));
+            Console.WriteLine("mustFlip should be true: " + mustFlip);
+
+            pt.Close();
 
             Console.WriteLine("Testing PlayerTrain");
             Console.WriteLine("IsOpen should be false: " + pt.IsOpen);
