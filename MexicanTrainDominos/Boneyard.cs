@@ -4,12 +4,11 @@ using System.Text;
 
 namespace MexicanTrainDominos
 {
-    public class Boneyard // Class representing the boneyard, where the remaining dominos are after players draw their hands
+    public class Boneyard
     {
         private List<Domino> listOfDominos;
 
-        // Count of dominos remaining in the boneyard
-        public int DominosRemaining
+        public int DominosRemaining // Boneyard count
         {
             get
             {
@@ -17,8 +16,7 @@ namespace MexicanTrainDominos
             }
         }
 
-        // Indexer for the boneyard
-        public Domino this[int index]
+        public Domino this[int index] // Indexer
         {
             get
             {
@@ -30,8 +28,7 @@ namespace MexicanTrainDominos
             }
         }
 
-        // Constructor, creates the boneyard with all the dominos up to the max dots specified
-        public Boneyard(int maxDots)
+        public Boneyard(int maxDots)  // Constructor
         {
             listOfDominos = new List<Domino>();
 
@@ -44,8 +41,7 @@ namespace MexicanTrainDominos
             }
         }
 
-        // Draw method, removes the top domino from the boneyard and returns it
-        public Domino Draw()
+        public Domino Draw() // Draw method, removed the top domino
         {
             if (IsEmpty())
             {
@@ -59,14 +55,12 @@ namespace MexicanTrainDominos
             return topDomino;
         }
 
-        // Method to check if the boneyard is empty
-        public bool IsEmpty()
+        public bool IsEmpty() // Empty boneyard check
         {
             return listOfDominos.Count == 0;
         }
 
-        // Shuffle method, randomizes the order of the dominos in the boneyard
-        public void Shuffle()
+        public void Shuffle()  // Randomizer
         {
             Random generator = new Random();
 
@@ -80,8 +74,7 @@ namespace MexicanTrainDominos
             }
         }
 
-        // ToString Method
-        public override string ToString()
+        public override string ToString() // ToString Method
         {
             string output = "";
 

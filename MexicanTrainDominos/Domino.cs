@@ -2,27 +2,25 @@ using System;
 
 namespace MexicanTrainDominos
 {
-    public class Domino // Class representing a single domino
+    public class Domino
     {
         private int side1;
         private int side2;
 
-        // Default Constructor
-        public Domino()  
+        public Domino()  // Default Constructor
         {
             side1 = 0;
             side2 = 0;
         }
 
-        // Overloaded Constructor
-        public Domino(int side1, int side2)
+        public Domino(int side1, int side2)  // Full Constructor
         {
             Side1 = side1;
             Side2 = side2;
         }
 
 
-        // Getters and Setters for the two sides of the domino
+        // Getters and Setters
         public int Side1
         {
             get { return side1; }
@@ -35,14 +33,12 @@ namespace MexicanTrainDominos
             set { side2 = value; }
         }
 
-        // ToString Method
-        public override string ToString()  
+        public override string ToString()  // ToString Method
         {
             return $"[{side1}|{side2}]";
         }
 
-        // Equals method, checks if two dominos are the same (regardless of order)
-        public override bool Equals(object obj)
+        public override bool Equals(object obj)  // Comparison
         {
             if (obj is Domino other)
             {
@@ -53,7 +49,6 @@ namespace MexicanTrainDominos
             return false;
         }
 
-        // Method to flip the domino
         public void Flip()
         {
             int temp = side1;
@@ -61,8 +56,7 @@ namespace MexicanTrainDominos
             side2 = temp;
         }
 
-        // GetHashCode method
-        public override int GetHashCode()
+        public override int GetHashCode()  // GetHash method
         {
             return HashCode.Combine(side1, side2);
         }

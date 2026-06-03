@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace MexicanTrainDominos
 {
-    public abstract class Train  // Abstract Class - Parent of MexicanTrain and PlayerTrain
+    public abstract class Train
     {
         private List<Domino> dominos;
         private int engineValue;
@@ -26,7 +26,6 @@ namespace MexicanTrainDominos
             engineValue = engValue;
         }
 
-        // Count number of dominos in the train
         public int Count
         {
             get
@@ -35,7 +34,6 @@ namespace MexicanTrainDominos
             }
         }
 
-        // Getter and Setter for the "engine" value of the train
         public int EngineValue
         {
             get
@@ -49,7 +47,6 @@ namespace MexicanTrainDominos
             }
         }
 
-        // Check for an empty train
         public bool IsEmpty
         {
             get
@@ -58,7 +55,6 @@ namespace MexicanTrainDominos
             }
         }
 
-        // Getter for the last domino played
         public Domino LastDomino
         {
             get
@@ -72,7 +68,6 @@ namespace MexicanTrainDominos
             }
         }
 
-        // Getter for the value the next domino should match
         public int PlayableValue
         {
             get
@@ -85,7 +80,7 @@ namespace MexicanTrainDominos
             }
         }
 
-        // Indexer method
+        // Indexer
         public Domino this[int index]
         {
             get
@@ -94,13 +89,11 @@ namespace MexicanTrainDominos
             }
         }
 
-        // Pplays the domino on the train
         public void Add(Domino d)
         {
             dominos.Add(d);
         }
 
-        // Checks if the domino can be played on the train and if it needs to be flipped
         public bool IsPlayable(Domino d, out bool mustFlip)
         {
             if (d.Side1 == PlayableValue)
@@ -119,10 +112,8 @@ namespace MexicanTrainDominos
             return false;
         }
 
-        // Abstract IsPlayable for child class implementation, chekcs if a hand is legal to be played from
         public abstract bool IsPlayable(Hand h, Domino d, out bool mustFlip);
 
-        // Plays the domino on the train and removes it from the hand
         public void Play(Hand h, Domino d)
         {
             bool mustFlip;
@@ -141,7 +132,6 @@ namespace MexicanTrainDominos
             h.Remove(d);
         }
 
-        // ToString method
         public override string ToString()
         {
             string output = "";
