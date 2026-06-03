@@ -8,6 +8,9 @@ namespace MexicanTrainDominos
         // Time to test!!!
         static void Main(string[] args)
         {
+            TestTrain();
+            Console.WriteLine();
+
             TestMexicanTrain();
             Console.WriteLine();
 
@@ -20,6 +23,47 @@ namespace MexicanTrainDominos
             TestTrainForEach();
 
             Console.ReadLine();
+        }
+
+        // Tests the abstract class Train: Constructor, Count, EngineValue, IsEmpty, LastDomino, PlayableValue, Indexer, Play, and ToString methods.
+        static void TestTrain()
+        {
+            Hand h = new Hand();
+
+            Domino d1 = new Domino(12, 5);
+            Domino d2 = new Domino(5, 8);
+
+            h.Add(d1);
+            h.Add(d2);
+
+            MexicanTrain train = new MexicanTrain(12);
+
+            Console.WriteLine("Testing Train Class");
+            Console.WriteLine("Count should be 0: " + train.Count);
+            Console.WriteLine("EngineValue should be 12: " + train.EngineValue);
+            Console.WriteLine("IsEmpty should be True: " + train.IsEmpty);
+            Console.WriteLine("PlayableValue should be 12: " + train.PlayableValue);
+
+            train.Play(h, d1);
+
+            Console.WriteLine();
+            Console.WriteLine("After first play:");
+
+            Console.WriteLine("Count should be 1: " + train.Count);
+            Console.WriteLine("IsEmpty should be False: " + train.IsEmpty);
+            Console.WriteLine("LastDomino should be [12|5]: " + train.LastDomino);
+            Console.WriteLine("PlayableValue should be 5: " + train.PlayableValue);
+            Console.WriteLine("Indexer [0] should be [12|5]: " + train[0]);
+
+            train.Play(h, d2);
+
+            Console.WriteLine();
+            Console.WriteLine("After second play:");
+
+            Console.WriteLine("Count should be 2: " + train.Count);
+            Console.WriteLine("LastDomino should be [5|8]: " + train.LastDomino);
+            Console.WriteLine("PlayableValue should be 8: " + train.PlayableValue);
+            Console.WriteLine("Train contents: " + train);
         }
 
         // Tests the Mexican Train. Creates a hand with one domino and plays it on the Mexican Train. The train should accept the domino and the hand should be empty after.
