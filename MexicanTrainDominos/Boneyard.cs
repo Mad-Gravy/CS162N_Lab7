@@ -4,11 +4,12 @@ using System.Text;
 
 namespace MexicanTrainDominos
 {
-    public class Boneyard
+    public class Boneyard // Class representing the boneyard, where the remaining dominos are after players draw their hands
     {
         private List<Domino> listOfDominos;
 
-        public int DominosRemaining // Boneyard count
+        // Count of dominos remaining in the boneyard
+        public int DominosRemaining
         {
             get
             {
@@ -16,7 +17,8 @@ namespace MexicanTrainDominos
             }
         }
 
-        public Domino this[int index] // Indexer
+        // Indexer for the boneyard
+        public Domino this[int index]
         {
             get
             {
@@ -28,7 +30,8 @@ namespace MexicanTrainDominos
             }
         }
 
-        public Boneyard(int maxDots)  // Constructor
+        // Constructor, creates the boneyard with all the dominos up to the max dots specified
+        public Boneyard(int maxDots)
         {
             listOfDominos = new List<Domino>();
 
@@ -41,7 +44,8 @@ namespace MexicanTrainDominos
             }
         }
 
-        public Domino Draw() // Draw method, removed the top domino
+        // Draw method, removes the top domino from the boneyard and returns it
+        public Domino Draw()
         {
             if (IsEmpty())
             {
@@ -55,12 +59,14 @@ namespace MexicanTrainDominos
             return topDomino;
         }
 
-        public bool IsEmpty() // Empty boneyard check
+        // Method to check if the boneyard is empty
+        public bool IsEmpty()
         {
             return listOfDominos.Count == 0;
         }
 
-        public void Shuffle()  // Randomizer
+        // Shuffle method, randomizes the order of the dominos in the boneyard
+        public void Shuffle()
         {
             Random generator = new Random();
 
@@ -74,7 +80,8 @@ namespace MexicanTrainDominos
             }
         }
 
-        public override string ToString() // ToString Method
+        // ToString Method
+        public override string ToString()
         {
             string output = "";
 

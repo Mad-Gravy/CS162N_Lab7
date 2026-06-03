@@ -1,14 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Xml.Serialization;
 
 namespace MexicanTrainDominos
 {
-    public abstract class Train  // Abstract Class - Parent of MexicanTrain and PlayerTrain
+    public abstract class Train : IEnumerable<Domino>  // Abstract Class - Parent of MexicanTrain and PlayerTrain
     {
         private List<Domino> dominos;
         private int engineValue;
@@ -94,7 +90,7 @@ namespace MexicanTrainDominos
             }
         }
 
-        // Pplays the domino on the train
+        // Adds the domino to the train
         public void Add(Domino d)
         {
             dominos.Add(d);
@@ -139,6 +135,18 @@ namespace MexicanTrainDominos
 
             Add(d);
             h.Remove(d);
+        }
+
+        // Enumerator allowing a foreach loop to be used with the train
+        public IEnumerator<Domino> GetEnumerator()
+        {
+            return dominos.GetEnumerator();
+        }
+
+        // Non-generic version required by IEnumerable.
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         // ToString method

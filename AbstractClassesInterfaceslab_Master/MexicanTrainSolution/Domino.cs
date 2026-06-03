@@ -2,7 +2,7 @@ using System;
 
 namespace MexicanTrainDominos
 {
-    public class Domino // Class representing a single domino
+    public class Domino : IComparable<Domino> // Class representing a single domino
     {
         private int side1;
         private int side2;
@@ -35,13 +35,22 @@ namespace MexicanTrainDominos
             set { side2 = value; }
         }
 
-        // ToString Method
-        public override string ToString()  
+        // Method to return the total number of pips on the domino
+        public int Score
         {
-            return $"[{side1}|{side2}]";
+            get
+            {
+                return side1 + side2;
+            }
         }
 
-        // Equals method, checks if two dominos are the same (regardless of order)
+        // CompareTo method, compares two dominos based on their score
+        public int CompareTo(Domino other)
+        {
+            return Score.CompareTo(other.Score);
+        }
+
+        // Equals method, checks if two dominos have identical side values
         public override bool Equals(object obj)
         {
             if (obj is Domino other)
@@ -59,6 +68,12 @@ namespace MexicanTrainDominos
             int temp = side1;
             side1 = side2;
             side2 = temp;
+        }
+
+        // ToString Method
+        public override string ToString()  
+        {
+            return $"[{side1}|{side2}]";
         }
 
         // GetHashCode method
